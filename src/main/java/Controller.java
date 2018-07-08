@@ -1,7 +1,4 @@
-import com.sun.org.apache.xpath.internal.operations.Number;
-import jdk.nashorn.internal.codegen.types.NumericType;
 import org.apache.commons.lang3.math.NumberUtils;
-
 import java.util.Scanner;
 
 /**
