@@ -49,6 +49,10 @@ public class Model {
         return requestedNumber > userNumber;
     }
 
+    public boolean isRequestedNumberSmallerThanUserNumber () {
+        return requestedNumber < userNumber;
+    }
+
     public void changeUserMinLimit () {
         userMinLimit = userNumber;
     }

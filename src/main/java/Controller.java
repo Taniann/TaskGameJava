@@ -1,3 +1,5 @@
+import java.io.IOException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -14,38 +16,47 @@ public class Controller {
 
     public void processUser(){
         model.toRequestNumber();
-        System.out.println(model.getRequestedNumber());
-        System.out.println(View.INPUT_INT_DATA);
-        model.setUserNumber(inputData());
+        view.printMessage(String.valueOf(model.getRequestedNumber()));
+        view.printMessage(View.INPUT_INT_DATA);
+        model.setUserNumber(inputUserNumber());
         while (!model.isGuessed()) {
-                checkIfUserNumberIsSuitable();
+                if (isLimitsCorrect()) {
+                    checkIfUserNumberIsSuitable();
+                    model.setUserNumber(inputUserNumber());
+                }
+                else {
+                    view.printMessage(View.WRONG_INPUT_DATA);
+                    model.setUserNumber(inputUserNumber());
+                }
             }
-        System.out.println(View.CONGRATULATION);
-        System.out.println(model.getPreviousNumbers().toString());
+        view.printMessage(View.CONGRATULATION);
+        view.printMessage(model.getPreviousNumbers().toString());
+    }
+
+    public boolean isLimitsCorrect () {
+        if ((model.getUserNumber() >= model.getUserMinLimit()) && (model.getUserNumber() <= model.getUserMaxLimit()))
+            return true;
+        else return  false;
     }
 
     public void checkIfUserNumberIsSuitable () {
-        while ((model.getUserNumber() < model.getUserMinLimit()) || (model.getUserNumber() > model.getUserMaxLimit())) {
-            System.out.println(View.WRONG_INPUT_DATA);
-            model.setUserNumber(inputData());
-        }
-        if (model.isRequestedNumberGreaterThanUserNumber()) {
-                System.out.println(View.GRATER);
+         if (model.isRequestedNumberGreaterThanUserNumber()) {
+                view.printMessage(View.GRATER);
                 model.changeUserMinLimit();
                 model.getPreviousNumbers().add(model.getUserNumber());
-                model.setUserNumber(inputData());
+               // model.setUserNumber(inputUserNumber());
             }
-        else if (!model.isRequestedNumberGreaterThanUserNumber()) {
-                System.out.println(View.SMALLER);
+         if (model.isRequestedNumberSmallerThanUserNumber()) {
+                view.printMessage(View.SMALLER);
                 model.changeUserMaxLimit();
                 model.getPreviousNumbers().add(model.getUserNumber());
-                model.setUserNumber(inputData());
+               // model.setUserNumber(inputUserNumber());
             }
     }
 
-    private int inputData(){
+    private int inputUserNumber(){
         Scanner sc = new Scanner(System.in);
-        int number = sc.nextInt();
+        int number =  sc.nextInt();
         return number;
     }
 }
