@@ -1,3 +1,7 @@
+import com.sun.org.apache.xpath.internal.operations.Number;
+import jdk.nashorn.internal.codegen.types.NumericType;
+import org.apache.commons.lang3.math.NumberUtils;
+
 import java.util.Scanner;
 
 /**
@@ -42,19 +46,23 @@ public class Controller {
                 view.printMessage(View.GRATER);
                 model.changeUserMinLimit();
                 model.getPreviousNumbers().add(model.getUserNumber());
-               // model.setUserNumber(inputUserNumber());
             }
          if (model.isRequestedNumberSmallerThanUserNumber()) {
                 view.printMessage(View.SMALLER);
                 model.changeUserMaxLimit();
                 model.getPreviousNumbers().add(model.getUserNumber());
-               // model.setUserNumber(inputUserNumber());
             }
     }
 
     private int inputUserNumber(){
+        int  number;
         Scanner sc = new Scanner(System.in);
-        int number =  sc.nextInt();
+        String input = sc.next();
+        while (!NumberUtils.isNumber(input)) {
+            view.printMessage(View.WRONG_INPUT_DATA);
+            input = sc.next();
+        }
+        number = Integer.parseInt(input);
         return number;
     }
 }
