@@ -36,7 +36,7 @@ public class Model {
         return previousNumbers;
     }
 
-    public void toRequestNumber () {
+    public void toRequestNumber() {
         requestedNumber = MIN_LIMIT + (int)(Math.random()* (MAX_LIMIT - MIN_LIMIT));
     }
 
@@ -45,19 +45,19 @@ public class Model {
                 else return false;
     }
 
-    public boolean isRequestedNumberGreaterThanUserNumber () {
+    public boolean isRequestedNumberGreaterThanUserNumber() {
         return requestedNumber > userNumber;
     }
 
-    public boolean isRequestedNumberSmallerThanUserNumber () {
+    public boolean isRequestedNumberSmallerThanUserNumber() {
         return requestedNumber < userNumber;
     }
 
-    public void changeUserMinLimit () {
+    public void changeUserMinLimit() {
         userMinLimit = userNumber;
     }
 
-    public void changeUserMaxLimit () {
+    public void changeUserMaxLimit() {
         userMaxLimit = userNumber;
     }
 

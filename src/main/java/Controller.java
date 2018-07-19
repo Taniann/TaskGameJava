@@ -13,7 +13,7 @@ public class Controller {
         this.view = view;
     }
 
-    public void processUser(){
+    public void processUser() {
         model.toRequestNumber();
         view.printMessage(String.valueOf(model.getRequestedNumber()));
         view.printMessage(View.INPUT_INT_DATA);
@@ -32,13 +32,13 @@ public class Controller {
         view.printMessage(model.getPreviousNumbers().toString());
     }
 
-    public boolean isLimitsCorrect () {
+    public boolean isLimitsCorrect() {
         if ((model.getUserNumber() >= model.getUserMinLimit()) && (model.getUserNumber() <= model.getUserMaxLimit()))
             return true;
         else return  false;
     }
 
-    public void checkIfUserNumberIsSuitable () {
+    public void checkIfUserNumberIsSuitable() {
          if (model.isRequestedNumberGreaterThanUserNumber()) {
                 view.printMessage(View.GRATER);
                 model.changeUserMinLimit();
@@ -51,7 +51,7 @@ public class Controller {
             }
     }
 
-    private int inputUserNumber(){
+    private int inputUserNumber() {
         int  number;
         Scanner sc = new Scanner(System.in);
         String input = sc.next();
